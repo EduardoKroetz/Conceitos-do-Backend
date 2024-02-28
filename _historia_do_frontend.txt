@@ -1,0 +1,148 @@
+Escrito com base nos vídeos de programação para iniciantes de Fabio Akita
+A HISTÓRIA DO FRONTEND é a própria história da web.
+
+Quando digitamos um site na web, por ex: https://meusite.com.br ele vai fazer dezenas
+de operações, mas no mínimo, ele precisa traduzir o nome do domínio em endereço IP.
+Quem faz essa tradução é um cara chamado DNS(Domain Name Server), é como se ele fosse
+uma lista telefonica traduzindo nomes para números.
+Agora é tarefa da rede(roteador, provedores) conectar o navegador a um servidor.
+
+A internet funciona pq todas as pontas falam o mesmo formato de mensagem e trafegam 
+de determinada maneira, que é o que chamamos de protocolo, e padra que nos interessa 
+é o famoso TCP/IP. O que precisamos saber por enquanto é que com o endereço ele 
+encontra o servidor certo no mundo.
+
+Bem em resumo, estamos falando de um aplicação de cliente TCP conectando a um
+servidor TCP que fica escutando no que chamamos de PORTA.
+
+Agora, o que é o servidor mais simples de todos? Ele simplesmente lê um arquivo da 
+máquina e serve esse arquivo.
+
+O endereço que digitamos no navegador se chama de URL(Universal Resource Locator) que
+é composto pelo protocolo, domínio e pelo caminho de um arquivo.
+Antigamente veriamos endereços como:
+https://sitefaculdade/~jose/arquivo.html
+Um bug de segurança poderia acontecer caso traduzisse diretamente de um arquivo e
+sem houvesse checagem, poderíamos tentar achar maneiras de vasculhar todos os arquivos
+do usuário.
+
+E quando um navegador, que é exemplo de cliente de TCP recebe esse arquivo.html agora
+ele traduz as marcações para elementos visuais.
+Dentro dessas marcações temos uma âncora, representada por <a href=""></a> que é 
+basicamente um link, agora temos então o conceito de hypertext, onde um texto possui
+link para outros textos.
+
+ENTÃO ASSIM NASCE A WWW(World Wide Web), que nasce naturalmente dados esse conceitos
+anteriores.
+
+------------------------------------------------------------------------------------
+
+O próximo passo, alguém pensou, e se invés de eu digitar um nome de um arquivo eu
+digitar um nome de um programa executável, um binário?
+Em um navegador bem antigo, provavel que não aconteceria nada, talvez desse erro pq
+o servidor não saberia como interpretar algo que não é texto.
+Mas então alguém fez um dos primeiros servidores web reconhecer quando é um executável
+e invés de só ler o arquivo e cuspir o conteúdo, ele tenta executar o programa no servidor
+e devolver o resultado dessa execução, que esperamos que seja um texto em html.
+Ou seja, pro navegador, não faz diferença se é um executável ou um arquivo texto,
+contanto que o que retorne para ele seja um texto em html.
+É assim então que a primeira geração de sites dinâmicos nasce, feitos em C mesmo e
+o padrão foi nomeado de CGI(Common Gateway Interface).
+Mas usar C pra fazer sites dinâmicos era como usar um canhão para matar mosca, mas
+felizemente, havia outra linguagem mais simples em ambientes UNIX e LINUX e melhor 
+adaptada para manipular cadeia de caracteres(strings), a foi assim que PERL foi a 
+principal linguagem usada para fazer CGI's. Foi assim que ficou popular a as Regular
+Expression(REGEX), que era o que o PERL trazia para manipular strings.
+
+Depois de surgir alguns servidores webs, como NETSCAPE, dentre outros. Um se destacou
+pela sua facilidade de uso e por ser Open Source, o APACHE.
+Uma das coisas mais irritantes da WEB no começo dos anos 90 era que se eu quisesse 
+fazer um site com 10 páginas eu precisaria criar 10 páginas html e depois aplicar
+suas modificações para cada página, e se eu quisesse editar eu teria que abrir as 10
+páginas e modificar uma a uma.
+Originalmente a ideia não era que o HTML ditasse como o conteúdo fosse visualmente
+estilizado, a ideia era que cada navegador estilizasse as páginas da maneira que 
+quisesse e o motivo disso foi pq o HTML foi inspirado em outras linguagens de marcação
+como o SGML.
+O divisor de águas foi o CSS, que dividiu o estilo do conteúdo e ganhamos mais
+controle sobre como o navegador estiliza a tela.
+Nessa época já tinha o NETSCAPE superando o antigo MOSAKE, mas o INTERNET EXPLORER
+sairia na frente pois implementava melhor o CSS ao contrário da NETSCAPE.
+
+Essa briga meio deu início a guerra dos navegadores, as ferozes batalhas entre a
+MICROSOFT e a NETSCAPE, onde cada versão do navegador tentando ser melhor em termos
+visuais e de interatividade do que o anterior.
+No fim dos anos 90, a NETSCAPE estava perdendo a guerra e resolver mudar o seu modelo
+de negócio e resolver vender seu navegador e abrir seu código fonte criando a fundação
+mozilla.
+Apareceu também o OPERA mostrando como redimensionar conteúdo para dispositivos móveis
+da época. Isso antes da aparição da BlackBarry.
+
+E foi quando vimos o primeiro uso de media types, que evoluíriam para media queries
+e seriam oficiais só no CSS3. Era usada para adaptar conteúdos para diferentes midias.
+
+Com o BOOM do INTERNET EXPLORER, foi quando a MICROSOFT começou a imbutir o máximo 
+da web no windows, e com o windows 98, vimos essa integração dessas tecnologias nos
+sistemas operacionais, como a utilização de MIME TYPES, uma tecnologia que surgiu 
+primeiro em emails para possibilitar embutir arquivos binários em emails onde só era
+possível colocar textos. MIME (Multipurpose Internet eMail Extensions) e que
+conhecemos como os pares do arquivo que determinam o seu tipo, como .jpg,.html,
+.img,.png, etc. É uma forma mais avançada do que no windows que são as extensões de
+arquivos como .html,.png,etc.
+
+O FILE EXPLORER foi mesclado ao INTERNET EXPLORER que possibilitava explorar os
+arquivos da máquina ou explorar os arquivos da web. Hoje em dia todos os navegadores
+de arquivos usam MIME TYPES, isso foi um dos estopins para caracterizar a prática
+monopolista da MICROSOFT em forçar as pessoas em usar INTERNET EXPLORER.
+
+Voltando ao assunto dos servidores web, quando servidores como APACHE se tornaram 
+capazes de executar coisas como scripts que manipulavam HTML antes de mandar pros
+navegadores, eu poderia escrever o HTML do layout como se fosse um template, um 
+modelo, e fazer só o conteúdo diferente daquelas 10 páginas separadas, e se
+precisasse mudar o layout, era só mudar nesse template e todas as 10 páginas
+automaticamente seriam modificadas. Com esse conceito, começamos a evoluir as 
+páginas de texto de hyperlink para algo mais dinâmico e agradável visualmente.
+Assim começava a nascer a profissão de web designer, que começou com designers
+gráficos de revistas tentando entender como traduzir o formato visual de revistas
+e livros em formato digital da web.
+
+E não apenas isso, dado que em as linguagens nos servidores sejam em C ou PERL 
+poderiam ter acesso a recursos como banco de dados, de repente uma nova possibilidade
+se abre, aplicações web, em vez de apenas sites web. E se eu pudesse criar um
+formulário onde o usuário pudesse digitar seu cartão de crédito e enviar para esses
+crypters, é como se inicia a semente para coisas como os e-commerces.
+A Microsoft novamente não deixou passar o oportunidade e criou seu próprio servidor
+web, o IIS(Internet Information Server) que adicionou tecnologias proprietárias como
+o FrontPage Server Extension, que permite criar páginas dinâmicas, com validações
+complicadas de formulário de maneira simples.
+
+Com o advento do AJAX (Asynchronous JavaScript and XML), as aplicações web começaram 
+a se tornar mais interativas, permitindo atualizações de conteúdo sem recarregar a 
+página inteira.
+A popularidade do AJAX impulsionou o desenvolvimento de frameworks e bibliotecas 
+JavaScript, como jQuery, Prototype.js e MooTools, que simplificaram o desenvolvimento 
+de aplicações web interativas.
+A partir dos anos 2000, o foco na usabilidade e na experiência do usuário se tornou 
+uma prioridade, levando ao surgimento de padrões de design como o Design Thinking e 
+o User-Centered Design.
+O crescimento do uso de dispositivos móveis e a diversificação de navegadores e 
+plataformas exigiram abordagens de desenvolvimento web responsivas e compatíveis, 
+levando à popularização do conceito de design responsivo.
+Com a proliferação de dispositivos e tamanhos de tela, o design adaptativo tornou-se 
+essencial para garantir uma experiência consistente em diferentes dispositivos e 
+resoluções.
+A ascensão das redes sociais e dos serviços de streaming de vídeo impulsionou a 
+demanda por interfaces ricas e dinâmicas, levando ao desenvolvimento de tecnologias 
+como HTML5, CSS3 e WebGL.
+O surgimento de frameworks de frontend como Bootstrap, Foundation e Materialize 
+facilitou o desenvolvimento de interfaces modernas e responsivas, oferecendo 
+componentes pré-projetados e estilos consistentes.
+Com o aumento da complexidade das aplicações web, surgiram novas abordagens de 
+arquitetura, como o padrão MVC (Model-View-Controller) e suas variantes, que 
+separavam as preocupações de dados, apresentação e lógica de negócios.
+A evolução contínua das tecnologias web, aliada ao crescente poder de processamento 
+e à melhoria da conectividade, tem possibilitado a criação de experiências web cada 
+vez mais avançadas e imersivas.
+O futuro do frontend promete continuar evoluindo, com avanços em áreas como 
+Realidade Virtual (VR), Realidade Aumentada (AR) e interfaces de usuário baseadas em 
+voz e gestos.
