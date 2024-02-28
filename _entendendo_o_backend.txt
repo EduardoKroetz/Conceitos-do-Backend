@@ -1,0 +1,168 @@
+Escrito com base nos vídeos de programação para iniciantes de Fabio Akita
+ENTENDENDO O BACKEND 
+
+-Processadores e Hardware:
+O autor começa explicando sobre o hardware de computadores, especialmente sobre a 
+CPU (Unidade Central de Processamento), que é o cérebro do sistema. Ele destaca que 
+a CPU é fabricada com um conjunto específico de instruções ou funções, e possui 
+registradores, que são como memórias temporárias onde os valores são armazenados 
+durante o processamento.
+
+-Assembly e Linguagem de Baixo Nível:
+Ele menciona a linguagem de programação Assembly, que é uma linguagem de baixo nível 
+utilizada para falar diretamente com a máquina. Em Assembly, os programadores escrevem
+códigos utilizando mnemônicos, que são abreviações para as instruções da CPU, como 
+"ADD" para adição ou "MOV" para mover dados entre registradores.
+
+-Chamadas de Sistema:
+Além das instruções de hardware, o autor fala sobre as chamadas de sistema, que são 
+instruções específicas do sistema operacional. Essas chamadas permitem que os 
+programas acessem recursos do sistema, como ler arquivos, alocar memória, entre outros.
+
+-Abstração do Sistema Operacional:
+O autor destaca que o sistema operacional é uma abstração da máquina física, 
+fornecendo funções mais complexas e amigáveis para os programas. Por exemplo, em vez
+de lidar diretamente com instruções de leitura e escrita em disco, os programas podem
+usar funções do sistema operacional, como "open()" e "read()".
+
+BIBLIOTECAS
+-Ligação Estática:
+Na ligação estática, as bibliotecas são incorporadas diretamente ao executável do 
+programa durante o processo de compilação. Isso significa que o código da biblioteca é
+copiado para o executável, formando um único arquivo binário. Quando o programa é 
+executado, todas as funções da biblioteca estão contidas dentro do próprio arquivo 
+executável. Isso resulta em um binário maior, pois inclui não apenas o código do 
+programa, mas também o código de todas as bibliotecas utilizadas.
+Vantagens:
+Não há dependência externa das bibliotecas; 
+Garante a consistência das versões das bibliotecas, já que o código da biblioteca 
+está "congelado" no executável. 
+Desvantagens:
+Binários maiores;
+Menor flexibilidade: Se uma biblioteca precisa ser atualizada ou corrigida, todos os 
+executáveis que a utilizam precisam ser recompilados e redistribuídos com a nova 
+versão.
+
+-Ligação Dinâmica:
+Na ligação dinâmica, as bibliotecas são carregadas em tempo de execução, quando o 
+programa é iniciado. Em vez de incorporar o código da biblioteca ao executável, o 
+programa faz referência a ela externamente. Isso significa que o código da biblioteca 
+permanece em arquivos separados, conhecidos como bibliotecas dinâmicas (geralmente com
+extensões como .dll no Windows ou .so no Linux).
+
+-Gerenciadores de Pacotes no Linux:
+Nas distribuições Linux, como o Red Hat, Ubuntu e Manjaro, existem gerenciadores de 
+pacotes como RPM, DPKG e Pacman, respectivamente. Esses gerenciadores facilitam a 
+instalação, atualização e remoção de software no sistema operacional.
+
+-Instalação de Software sem Pacote Disponível:
+Quando não há um pacote disponível para o software desejado, é comum baixar um arquivo
+tarball (tipo de arquivo zip) contendo o código-fonte do programa. Nesse caso, é 
+necessário compilar e instalar o software a partir do código-fonte.
+
+-Processo de Compilação e Instalação:
+O processo de compilação e instalação geralmente envolve três comandos principais na 
+linha de comando:
+  ./configure: Verifica se todas as dependências necessárias estão instaladas na máquina.
+  make: Compila o código-fonte do projeto, utilizando o arquivo Makefile para definir as tarefas a serem executadas.
+  make install: Instala o software compilado, movendo os binários para um diretório onde o sistema possa encontrá-los.
+
+-Dependências e Compilação:
+Programas modernos são dependentes de várias bibliotecas e o processo de compilação 
+pode ser demorado, já que envolve a transformação de centenas de arquivos de 
+código-fonte em binários executáveis, podendo ser vinculados estaticamente ou 
+dinamicamente com as bibliotecas necessárias.
+
+-Instalação de Software no Windows:
+No Windows, é mais comum baixar um instalador que inclui o binário do programa e 
+instala as dependências necessárias automaticamente. Isso resulta em um sistema 
+operacional mais pesado, com bibliotecas mais antigas disponíveis, mas oferece 
+compatibilidade com versões antigas de programas.
+
+-Mac OS:
+O Mac OS mantém muitas bibliotecas antigas até certo ponto, mas também fornece 
+compiladores e permite compilar diretamente do código-fonte, mantendo os cabeçalhos 
+das bibliotecas necessárias para a conclusão.
+
+-Interpretadores:
+Os interpretadores são programas que leem o código-fonte que você escreveu e o 
+traduzem em instruções de máquina sem a necessidade de compilar para um binário nativo.
+Eles dependem do código-fonte do programa e interpretam as instruções toda vez que o 
+programa é executado.
+
+-Funcionamento das Linguagens Interpretadas:
+Linguagens como Python, Ruby e JavaScript funcionam inicialmente com interpretadores. 
+Esses interpretadores leem o código-fonte e o traduzem em instruções de máquina sem 
+a necessidade de compilação para um binário nativo.
+
+-Pré-Compilação em Python:
+Em Python, por exemplo, é possível pré-compilar o código-fonte em uma representação 
+intermediária para economizar tempo de leitura do arquivo texto e construção da árvore
+sintática abstrata (AST).
+
+-Extensões de Arquivos e Pré-Compilação:
+Em Python, o código-fonte tem a extensão .py e, quando pré-compilado, pode ter a 
+extensão .pyc.
+
+-Velocidade de Leitura e Execução:
+Atualmente, com discos rígidos rápidos, a velocidade de leitura do código-fonte não é
+tão relevante como era no passado. Antigamente, a rápida inicialização e término de 
+programas de linha de comando eram mais importantes.
+
+-Utilização de Interpretação no Passado:
+No passado, a interpretação era comum para programas de linha de comando, podendo ser 
+acionados diretamente via terminal ou através de scripts.
+
+-Embutimento do Interpretador em Pacotes:
+Uma opção era embutir o interpretador junto com o código-fonte em um único executável,
+como fazia o Visual Basic antes da versão 6. Isso dava a impressão de um binário 
+nativo, mas na verdade era um pacote que incluía ambos.
+
+-Opção de Compilação em Binário Nativo no Visual Basic 6:
+A partir do Visual Basic 6, havia a opção de compilar o código-fonte em binário nativo
+usando o compilador do Visual Basic.
+
+-Criação de Processos em Sistemas Operacionais:
+Em sistemas operacionais como Linux, criar processos é relativamente barato em termos
+de recursos, enquanto em sistemas como Windows, há um overhead maior devido a 
+diferentes requisitos.
+
+-Limitação de Servir Clientes:
+Originalmente, em sistemas Unix, um programa de servidor normalmente conseguia atender
+apenas um cliente por vez.
+
+-Abordagem para Servir Múltiplos Clientes:
+Para permitir que um servidor Unix atendesse vários clientes simultaneamente, a 
+solução comum era realizar um "fork" do processo. Isso significava criar uma cópia do
+ programa em execução na memória para cada nova conexão.
+
+-Processo de Fork:
+O fork envolvia criar uma cópia do programa pai na memória sempre que uma nova conexão
+chegasse ao servidor. Isso era relativamente rápido devido ao uso do recurso do 
+sistema operacional chamado "Copy-On-Write" (COW), que permitia compartilhar partes da
+memória entre os processos.
+
+-Economia de Memória com o Fork:
+Ao utilizar o fork, o novo processo não duplicava toda a memória do processo pai. Em 
+vez disso, ele compartilhava partes da memória com o processo pai, o que resultava em
+uma utilização eficiente da memória, mesmo que múltiplos processos estivessem em 
+execução simultaneamente.
+
+-Diferença no Conceito de Fork:
+No Windows, não existe o conceito exato de fork, que é comum em sistemas Unix/Linux.
+O Windows tem abordagens semelhantes, mas não idênticas, para lidar com processos.
+
+-Performance do Fork no Windows:
+O recurso de criação de processos no Windows, embora possua funcionalidades 
+semelhantes ao fork, como a cópia-on-write (cal), não é tão utilizado e é 
+significativamente mais lento em comparação com sistemas Unix/Linux. 
+Isso contribui para a percepção inicial de que servidores web, como o Apache, 
+tinham desempenho inferior no Windows em comparação com o Linux.
+
+-Diferenças de Desempenho entre Sistemas Operacionais:
+As diferenças na implementação de recursos como o fork têm impacto significativo no 
+desempenho dos servidores web e de outros aplicativos. Isso resulta em preferências 
+distintas entre desenvolvedores e administradores de sistemas, com algumas soluções 
+funcionando melhor em sistemas Windows e outras em sistemas Linux. É importante 
+considerar essas diferenças ao desenvolver e executar aplicativos em diferentes 
+plataformas operacionais.
