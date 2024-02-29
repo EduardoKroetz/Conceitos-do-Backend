@@ -64,8 +64,10 @@ necessário compilar e instalar o software a partir do código-fonte.
 O processo de compilação e instalação geralmente envolve três comandos principais na 
 linha de comando:
   ./configure: Verifica se todas as dependências necessárias estão instaladas na máquina.
-  make: Compila o código-fonte do projeto, utilizando o arquivo Makefile para definir as tarefas a serem executadas.
-  make install: Instala o software compilado, movendo os binários para um diretório onde o sistema possa encontrá-los.
+  make: Compila o código-fonte do projeto, utilizando o arquivo Makefile para definir as 
+  tarefas a serem executadas.
+  make install: Instala o software compilado, movendo os binários para um diretório onde 
+  o sistema possa encontrá-los.
 
 -Dependências e Compilação:
 Programas modernos são dependentes de várias bibliotecas e o processo de compilação 
@@ -134,7 +136,7 @@ apenas um cliente por vez.
 -Abordagem para Servir Múltiplos Clientes:
 Para permitir que um servidor Unix atendesse vários clientes simultaneamente, a 
 solução comum era realizar um "fork" do processo. Isso significava criar uma cópia do
- programa em execução na memória para cada nova conexão.
+programa em execução na memória para cada nova conexão.
 
 -Processo de Fork:
 O fork envolvia criar uma cópia do programa pai na memória sempre que uma nova conexão
@@ -166,3 +168,110 @@ distintas entre desenvolvedores e administradores de sistemas, com algumas solu�
 funcionando melhor em sistemas Windows e outras em sistemas Linux. É importante 
 considerar essas diferenças ao desenvolver e executar aplicativos em diferentes 
 plataformas operacionais.
+
+-Processos versus Threads:
+Atualmente, é mais comum usar threads (linhas de execução em paralelo) dentro de um mesmo 
+processo do que processos individuais com fork. No entanto, os processos com fork não 
+estão obsoletos e ainda são amplamente utilizados em muitos softwares, como o conector do 
+banco de dados do PostgreSQL.
+
+-Conceito de Processo:
+Quando um programa é executado, o sistema operacional cria uma entidade chamada processo. 
+Cada processo tem sua própria área de memória e é isolado dos outros processos em execução 
+no sistema.
+
+-Memória Virtual:
+A memória é tratada como uma sequência de páginas numeradas sequencialmente. Cada programa 
+começa com a página 1 da memória virtual, e o sistema operacional é responsável por 
+traduzir essas páginas virtuais para páginas reais na memória física. Isso garante que 
+cada programa tenha acesso apenas à sua própria área de memória, proporcionando um mínimo
+de segurança entre os programas em execução.
+
+-Modo Real no MS-DOS:
+No antigo MS-DOS, que rodava em modo real, cada programa tinha acesso a todos os endereços 
+reais da máquina. Isso não causava problemas porque só era possível executar um programa de 
+cada vez.
+
+-Execução de Múltiplos Programas:
+Hoje em dia, podemos rodar vários programas em paralelo, o que facilita para os 
+programadores, pois não precisam se preocupar com a memória dos outros programas. No entanto,
+ao lidar com servidores web, onde cada conexão de cliente TCP precisa ser tratada em 
+paralelo, é necessário lidar com múltiplos processos ou threads.
+
+-Threads versus Forks:
+No Linux, é comum usar forks para criar processos isolados para cada conexão, enquanto no 
+Windows, devido ao custo elevado dos forks, é necessário usar outros métodos, como DLLs 
+compartilhadas, para lidar com múltiplas conexões.
+
+-Problemas com Threads:
+Escrever programas multi-threaded pode ser complicado, pois cada thread compartilha a mesma
+memória virtual do processo. É necessário garantir a segurança entre as threads para evitar
+corromper a memória de outras threads. Isso geralmente é feito usando locks para garantir 
+que apenas uma thread acesse a memória por vez.
+
+-Resumo Geral:
+Um programa binário é executado em um processo isolado pelo sistema operacional. Cada 
+processo pode conter múltiplas threads. No Linux, múltiplos processos são usados para lidar 
+com múltiplas conexões, enquanto no Windows, outros métodos, como DLLs, são empregados devido
+ao custo dos forks. Escrever programas multi-threaded pode ser desafiador devido à 
+necessidade de garantir a segurança entre as threads.
+
+-Linguagens Interpretadas e Arquiteturas como FastCGI, ISAPI e NSAPI:
+Com o surgimento de arquiteturas como FastCGI, ISAPI, NSAPI, entre outras, e a 
+disponibilidade de interpretadores que simplificam a escrita de código, linguagens
+interpretadas como PHP e ASP clássico ganharam destaque no mercado. Isso se deu 
+especialmente durante o boom das empresas pontocom nos anos 90.
+
+-Execução de Múltiplas Threads:
+Para permitir que várias threads rodem em paralelo, um processo pode conter múltiplas 
+threads. No entanto, a CPU possui um agendador que só pode executar um número limitado 
+de threads simultaneamente. Ele pausa uma thread de execução de acordo com critérios 
+específicos e dá oportunidade para outras threads rodarem, criando a ilusão de execução 
+simultânea.
+
+-Locks para Garantir a Segurança:
+Ao lidar com programação multi-threaded, é essencial usar locks para garantir que várias 
+threads não interfiram umas nas outras. Locks são mecanismos que evitam que uma thread acesse
+determinada área da memória enquanto outra thread a está utilizando, prevenindo assim 
+problemas como a corrupção de dados.
+
+-Contexto do Surgimento do Java:
+Em 1991, surgiu uma nova linguagem de programação com o codinome "Oak", que mais tarde 
+foi renomeada para Java. Inicialmente, seu objetivo era desenvolver um sistema para
+set-top boxes, dispositivos multimídia que integravam TV a cabo e outros conteúdos, 
+antecipando conceitos que viriam a ser populares, como o Google Chromecast e o Apple TV.
+
+-Java Virtual Machine (JVM):
+O Java incorpora conceitos tanto de compiladores quanto de interpretadores, mas introduz 
+uma abordagem diferente: a máquina virtual Java (JVM). A JVM não é apenas um interpretador;
+ela aspira a ser um sistema operacional em si, abstraindo a máquina real subjacente. No 
+contexto da JVM, não há um sistema operacional específico (Linux ou Windows) rodando em 
+um processador Intel; em vez disso, há apenas a JVM.
+
+-Compilação para Bytecode:
+O compilador Java traduz o código-fonte para uma forma intermediária chamada "Java bytecode".
+Enquanto compiladores tradicionais traduzem o código para instruções nativas do sistema 
+operacional e do processador, o compilador Java produz bytecode, que é independente do 
+sistema operacional e do processador. Esse bytecode é executado pela JVM.
+
+-Java Bytecode e Portabilidade:
+O bytecode Java é um formato intermediário que pode ser executado em qualquer máquina virtual
+Java, independentemente do sistema operacional ou processador subjacente. Isso confere ao 
+Java uma alta portabilidade, pois o mesmo bytecode pode ser executado em diferentes ambientes
+sem necessidade de recompilação.
+
+-Simulação de um Computador pela JVM:
+A JVM funciona como uma simulação de um computador, onde o bytecode Java é interpretado e 
+executado. É como se cada JVM simulasse um ambiente de computação independente, 
+proporcionando uma plataforma unificada para a execução de aplicativos Java em diferentes
+dispositivos e sistemas operacionais.
+
+Desafios da compatibilidade entre sistemas operacionais para interpretadores e a evolução do 
+.NET:
+a compatibilidade entre sistemas operacionais é um desafio para interpretadores, já que 
+dependem de diferentes bibliotecas e sistemas subjacentes. O Windows possui suas próprias
+bibliotecas proprietárias, enquanto o Linux e o macOS compartilham muitas bibliotecas open
+source. Java surgiu com a promessa de ser multiplataforma, mas a Microsoft tentou criar 
+sua própria versão com o J++ e depois com o C#, que se tornou parte do .NET Framework.
+Inicialmente, o .NET era focado no Windows, mas a iniciativa Mono trouxe compatibilidade
+para Linux. Com o tempo, a Microsoft adotou uma postura mais amigável ao open source.
