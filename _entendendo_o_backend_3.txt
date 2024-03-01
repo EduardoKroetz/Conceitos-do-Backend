@@ -1,0 +1,34 @@
+CONCORRÊNCIA E PARALELISMO
+
+Contextualização da evolução dos conceitos de concorrência e paralelismo:
+Para compreender adequadamente os conceitos de concorrência e paralelismo na programação, é importante revisitar a história e entender como os sistemas computacionais evoluíram ao longo do tempo. Nas décadas de 50 e 60, os computadores eram máquinas caras e poderosas, porém com recursos limitados em comparação aos dispositivos modernos. Por exemplo, o IBM 701, um dos primeiros computadores comerciais, tinha uma memória de apenas 1 KB e operava com fitas magnéticas para armazenamento.
+
+Evolução dos sistemas de processamento:
+Na era dos mainframes dos anos 60, surgiu o conceito de compartilhamento de tempo (time sharing), onde múltiplos usuários podiam interagir com o computador simultaneamente, cada um com seu próprio contexto de trabalho. Isso foi fundamental para aumentar a eficiência de uso dos recursos computacionais.
+
+Multitarefa cooperativa e preemptiva:
+Nos sistemas operacionais das décadas de 80 e 90, como o Windows 3.1 e o Windows 95, a multitarefa permitia que múltiplos programas fossem executados aparentemente ao mesmo tempo, embora de forma cooperativa. Posteriormente, com sistemas operacionais mais avançados, como o Windows NT e as distribuições Linux, a multitarefa se tornou preemptiva, onde o sistema operacional interrompe(scheduler) os processos para permitir que outros executem, sem depender da cooperação dos programas. 
+
+Conceitos de threads e processos:
+A partir dos anos 90, com o aumento do poder computacional, tornou-se comum o uso de processadores com múltiplos núcleos. Isso possibilitou a execução verdadeiramente paralela de múltiplas threads, que são unidades de execução dentro de um processo. No entanto, é importante considerar que recursos compartilhados entre threads podem levar a problemas de concorrência, como as condições de corrida (race conditions) e os deadlocks.
+
+Considerações sobre a eficiência do paralelismo:
+Embora múltiplos núcleos possam proporcionar maior capacidade de processamento, é importante notar que o paralelismo não é uma solução universal para melhorar o desempenho de todos os tipos de aplicativos. A sobrecarga de gerenciamento de múltiplas threads e a competição por recursos podem resultar em diminuição da eficiência em alguns casos.
+
+
+COMPLEXIDADE DE PROCESSOS E THREADS EM SISTEMAS OPERACIONAIS
+
+O processo de criação de processos em sistemas operacionais não é gratuito; ele envolve carregar o binário do programa, alocar memória do sistema e verificar permissões de segurança. Essa operação é mais rápida em sistemas Linux do que em macOS ou Windows, sendo aproximadamente uma ordem de grandeza mais rápida. No Linux, muitos programas, como o Apache, aproveitam a operação de "fork", que cria uma cópia rápida do processo atual para gerar outro processo que rodará concorrentemente. No entanto, o custo de criar processos varia entre os sistemas operacionais. Por exemplo, no Windows, é mais caro criar processos, enquanto a criação de threads é mais barata. A escolha entre processos e threads envolve trocas: os processos são isolados uns dos outros, evitando race conditions, mas exigem mais gerenciamento manual, enquanto as threads compartilham memória e são mais fáceis de programar, mas podem ser mais propensas a bugs complexos. Embora criar threads seja mais fácil no Windows do que criar processos, isso também vem com desafios adicionais. Uma dessas dificuldades é garantir que as threads não interfiram umas nas outras, o que pode levar a problemas como race conditions e necessidade de gerenciamento manual de mutexes (travas de exclusão mútua) e outros mecanismos de sincronização.
+
+Um exemplo prático disso é o caso dos navegadores web, como o Firefox ou o Chrome, que utilizam recursos de multiprocessamento para melhorar a estabilidade e segurança. Inicialmente, os navegadores usavam uma única thread para todas as abas, mas isso resultava em bugs que poderiam desestabilizar o navegador inteiro. Com o tempo, os navegadores passaram a separar cada aba em processos independentes, o que aumentou a estabilidade, mas também consumiu mais recursos do sistema.
+
+No Linux, cada processo tem acesso a uma cópia da memória do processo pai, enquanto no Windows, o "fork" duplica a memória. Isso torna os processos mais leves e eficientes no Linux. Além disso, as implementações de threads no Linux melhoraram ao longo do tempo, corrigindo falhas e tornando-as mais eficazes.
+
+Ex de uso de uma metáfora envolvendo mesas ilustra o processo de criação de processos em sistemas operacionais: Quando há apenas uma mesa disponível, uma pessoa trabalha enquanto as outras aguardam sua vez. No entanto, se uma pessoa não preparada ocupar a mesa, pode resultar em ineficiência. Adicionar mais mesas pode parecer uma solução, mas pode aumentar a complexidade operacional.
+
+A evolução das estratégias de escalonamento de (processos) é destacada. Inicialmente, o Linux enfrentava dificuldades em lidar com operações de entrada e saída, como reprodução de vídeo. Em 2007, com o lançamento do kernel 2.6, melhorias significativas foram implementadas, incluindo o Completely Fair Scheduler (CFS), que otimiza o uso da CPU e prioriza aplicativos interativos.
+
+O "problema dos 10 mil concorrentes" (C10k problem) também surge como um desafio de escalabilidade para servidores web lidando com um grande volume de conexões simultâneas. Diferentes estratégias foram adotadas para resolver esse problema, incluindo a utilização de processos, threads e chamadas de I/O assíncronas. O I/O assíncrono permite que os processos continuem executando outras tarefas enquanto aguardam a conclusão das operações de I/O.
+Em contraste com a abordagem síncrona, onde o processo fica bloqueado durante a I/O, o I/O assíncrono mantém a fluidez da execução do programa.
+
+O projeto Nginx é apresentado como uma solução eficiente que combina processos e chamadas de I/O assíncronas para lidar com um grande número de conexões simultâneas. Essa abordagem evita a sobrecarga associada à criação de threads ou processos individuais para cada conexão, ilustrando-se pela metáfora das mesas, onde um garçom (Nginx) eficientemente recebe os pedidos dos clientes e os repassa ao chef (processos), permitindo o atendimento de múltiplas conexões simultaneamente.
