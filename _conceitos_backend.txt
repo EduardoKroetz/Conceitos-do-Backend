@@ -1,0 +1,238 @@
+Registradores da CPU:
+	Guardar valor no CPU para acesso mais rápido
+Processos:
+	Rodar código, ou ...Um processo é uma instância de um programa em execução,
+  incluindo o código executável, dados do programa, variáveis e contexto de execução.;
+Overhead:
+	Qualquer gasto custo de recurso adicional não relacionado ao programa principal.
+Memória Virtual:
+	A memoria virtual é usada principalmente quando não temos espaço suficiente 
+	na memoria RAM, é então feito o armazenamento no próprio disco rígido, apesar de ser 
+	níveis de grandeza mais lento. Então a memória virtual vai fazer como se fosse uma 
+	intermediação entre a RAM e o disco rígido, onde ela vai usar um sistema de paginação
+ 	onde vai guardar os endereços correspondestes na RAM, e caso esse endereço não se 
+	localize, ocorre o page fault, onde o OS faz a busca no disco rígido e traz de volta
+ 	a RAM, agora tendo acesso
+Servidores web e de aplicação:
+  Hoje em dia é mais complicado diferenciar os dois conceitos,
+  porém simplificando, um servidor web se referia a servidores
+  que serviam conteúdos estáticos e dinâmicos, como o APACHE.
+  Já os de aplicação, poderiam fazer uma própria aplicação,
+  ou seja, lidariamos com conexões ao banco de dados, lógicas
+  de negócio, etc.
+Libs estaticas e libs dinâmicas:	
+	Libs estaticas são compiladas no executável, estão 'congeladas',
+	e precisam de recompilação inteira do executável em caso de atualização da lib.
+	Podem ter um arquivo executável mais 'pesado' por causa da compilação de todas
+	as bibliotecas, gerando um binário enorme.
+
+	Libs dinâmicas são separadas em arquivos geralmente .dll no windows, .so no linux.
+	Estão parcialmente 'congeladas' também se não tiver atualização automática, 
+	mas não precisam de recompilação do executável inteiro para atualização.
+	Precisam ser localizadas e carregadas na RAM pelo SO durante a execução do programa,
+	gerando um overhead.
+Forks:
+	Forks são basicamente processos paralelos, eles são criados para lidar 
+	com múltiplas requisições e funcionam exepcionalmente melhor em linux.
+	Quando um fork é criado, ele se baseia no processo pai e faz uma cópia
+  compartilhada desse processo, não necessariamente duplicando a memoria
+	do processo pai. Em vez disso, só é feito uma cópia quando o fork modifica
+  alguma coisa.Por ex, quando valores de variáveis são diferentes.
+Cow(copy-on-write): 
+  Vamos supor que tenhamos várias threads querendo
+  acessar o mesmo recurso, em vez criar cópia para cada
+  thread podemos simplesmente compartilhar o recurso entre
+  as threads, e somente quando alguma coisa for modificada
+  será feita uma cópia.
+Recurso compartilhado:
+	Qualquer recurso, seja váriavel, arquivos,conexão de rede que estejam disponíveis
+	para múltiplos threads acessarem dentro de um processo.
+Threads:
+  Threads são sequências de execução dentro de um processo.
+	Um pouco semelhante aos forks também, mas aqui em vez de criar processos
+	filhos, são criados meio que 'microprocessos' dentro de um processo.
+	Isso significa também que temos recursos compartilhados, pois qualquer recurso 
+	que está dentro do processo, pode ser acessado pelos threads.
+	Podem ser gerenciadas pelos próprios programadores, e pelo SO, quando
+	não gerenciado.
+	Tem certa complexidade ao lidar com threads, já que pode ocorrer race-condition,
+	deadlocks, starvation, além de ocorrer overhead muitas vezes graças a troca de
+	contexto, criação e destruição de threads, o uso de mutexes e semáforos para
+	gerenciar pode introduzir bloqueios e a necessidade de espera.
+	Em geral consumem menos memória que os forks.
+	Bastante usado em windows, apesar que Linux também usa bastante de
+	threads. 
+Race-condition:
+	Quando dois ou mais thread acessam o mesmo recurso compartilhado, podendo ter
+	inconsistência de dados, deadlocks, starvation
+Mutexes ou lock:
+	Meio que colocamos uma placa 'ocupado' quando um thread estiver usando um 
+	recurso compartilhado, e uma placa de 'desocupado' quando não.
+Semáforos:
+	Assim como as mutexes que são usados para exclusão mútua, eles também fazem
+	isso, porém implementam os semáforos contadores também, que podem ser usados
+	para controlar o acesso à um número fixo de recursos.
+Monitores:
+  São basicamente uma junção de algo parecido com mutexes ou semáforos,
+  junto com uma variável de condição. Essa variável de condição pode ser
+  usada para limitar o acesso aos recursos compartilhados, somente tendo
+  acesso quando a condição for atendida.
+CGI e FastCGI:
+  CGI é um padrão que permite a interação entre um servidor web
+  e programas externos para gerar conteúdo dinâmico em páginas
+  da web. Quando um cliente faz uma solicitação HTTP para uma
+  página que requer processamento dinâmico (como um formulário), 
+  o servidor web chama um programa CGI correspondente, passando os
+  parâmetros da solicitação. O programa CGI processa esses parâmetros,
+  executa a lógica de negócios necessária (como processar um 
+  formulário, acessar um banco de dados, etc.) e gera uma resposta
+  dinâmica, que é enviada de volta ao cliente pelo servidor web. 
+  Embora ainda seja usado em certos casos, o CGI foi em grande parte 
+  substituído por tecnologias mais eficientes e escaláveis, como FastCGI, PHP e Node.js.
+  O principal problema do CGI, é que a cada requisição ele inicializa um novo CGI,
+  causando um overhead. Aí entra o FastCGI, que mantém a execução e não inicializa
+  a cada nova solicitação.
+Deadlocks:
+	Basicamente temos dois ou mais processos, onde um depende do recurso 
+	do outro, e nenhum dos dois quer 'ceder', e estão apenas aguardando
+	um o recurso do outro.
+ISAPI e NSAPI:
+  ISAPI e NSAPI são essencialmente conjuntos de interfaces de programação
+  que permitem a comunicação entre aplicativos desenvolvidos pelo programador
+  e o servidor web. Eles fornecem uma maneira de estender a funcionalidade do
+  servidor web, permitindo que os desenvolvedores criem e integrem suas próprias
+  extensões diretamente no ambiente do servidor.
+  Perderam relevância no mercado e são pouco utilizadas atualmente.
+Scheduler:
+  É uma parte fundamental do OS que gerencia qual processo
+  deve ser executado pela CPU em uma operação multithread,
+  garantindo recursos de maneira igualitária para os processos.
+conceito 'binding':
+  É basicamente o processo de associação de um
+  identificador(como o nome de uma variável, função, etc)
+  ao seu valor.
+  Existem dois tipos: bindings estáticos são vinculados
+  na própria compilação e os dinâmicos durante a execução.
+Componentes:
+  Em geral, é uma parte independente e reutilizável
+  de um sistema maior. Como uma classe por ex.
+MFC:
+  O MFC é um conjunto de classes em C++ desenvolvido pela Microsoft para simplificar o desenvolvimento de aplicativos Windows. Ele fornece uma estrutura para criar aplicativos GUI (Interface Gráfica do Usuário) para Windows, lidar com mensagens de janela, gerenciamento de documentos, e muito mais. O MFC é amplamente utilizado em aplicativos desktop nativos do Windows.
+OLE:
+  "OLE" significa "Object Linking and Embedding", que em português seria
+  algo como "Objeto de Ligação e Incorporação". É um sistema desenvolvido
+  pela Microsoft que permite que aplicativos compartilhem informações e
+  funcionem juntos de forma mais integrada. Com o OLE, você pode incorporar
+  objetos criados em um programa em outro programa. Por exemplo, você pode
+  incorporar uma planilha do Excel em um documento do Word.
+COM:
+  O COM, ou Component Object Model, é uma tecnologia de plataforma da
+  Microsoft para software que permite a comunicação entre objetos dentro
+  de um mesmo processo ou entre processos em um sistema operacional Windows.
+  Ele foi introduzido pela primeira vez na década de 1990 e é fundamental para
+  muitas aplicações Windows.
+
+  Integração de Componentes: O COM permite que os desenvolvedores criem
+  componentes de software independentes que podem ser reutilizados e integrados
+  em diferentes aplicativos.
+  Interface-baseado: O COM é orientado a interface, o que significa que os
+  objetos COM expõem interfaces que definem como eles podem ser acessados e
+  utilizados por outros componentes.
+  Registro de Componentes: Os componentes COM são registrados no sistema
+  operacional Windows, o que permite que outros aplicativos localizem e
+  usem esses componentes através de um sistema de registro centralizado.
+  Modelo de Objeto: O COM segue um modelo de objeto, onde os componentes são
+  representados como objetos que têm propriedades, métodos e eventos.
+  Linguagem Neutra: Os componentes COM podem ser desenvolvidos em várias
+  linguagens de programação, incluindo C++, C#, Visual Basic, e outras.
+DCOM, CORBA,RPC:
+  DCOM (Distributed Component Object Model):
+  DCOM é uma extensão do Component Object Model (COM) que permite a comunicação entre
+  componentes distribuídos em uma rede de computadores. Ele estende as capacidades do
+  COM para suportar chamadas de procedimento remoto (RPC) entre aplicativos em diferentes
+  computadores. DCOM é uma tecnologia da Microsoft, utilizada principalmente em sistemas
+  Windows, e permite que os aplicativos distribuídos se comuniquem de forma transparente,
+  como se estivessem em execução localmente.
+
+  CORBA (Common Object Request Broker Architecture):
+  CORBA é uma arquitetura padrão para comunicação e interoperabilidade entre sistemas
+  distribuídos. Ela define um modelo de objeto distribuído baseado em interfaces e um serviço
+  de middleware chamado Object Request Broker (ORB), que facilita a comunicação entre objetos
+  distribuídos em diferentes plataformas e linguagens de programação. CORBA é uma especificação
+  independente de fornecedor, mantida pelo Object Management Group (OMG), e foi amplamente adotada
+  em sistemas distribuídos durante a década de 1990 e início dos anos 2000.
+
+  RPC (Remote Procedure Call):
+  RPC é um modelo de comunicação entre processos que permite que um programa chame uma função ou
+  procedimento em outro computador como se estivesse chamando uma função local. Ele é usado para
+  implementar a comunicação entre sistemas distribuídos, onde as chamadas de procedimento são
+  encapsuladas e transmitidas pela rede. Existem várias tecnologias que implementam RPC, como DCOM,
+  CORBA, gRPC e o mecanismo de RPC integrado ao sistema operacional Windows.
+  IIORB, ORB
+Mainframes:
+  Um mainframe é um tipo de computador de grande porte, geralmente utilizado por grandes organizações para processar grandes volumes de dados em tempo real. Diferentemente dos computadores pessoais, que são mais comuns em residências e pequenas empresas, os mainframes são projetados para lidar com cargas de trabalho pesadas e executar várias tarefas simultaneamente. Eles são frequentemente utilizados em setores como serviços financeiros, governamentais, de saúde e de telecomunicações.
+Time-sharing:
+  É basicamente uma técnica de compartilhamento de recursos,
+  como o processamento da CPU, onde qualquer processo que esteja
+  concorrendo pelo recurso estará envolvido.
+  O conceito principal por trás dele é dividir o tempo
+  de processamento da CPU entre pequenos tempos, chamados de
+  'time slices' e compartilhar esse time slice entre diferentes
+  concorrentes.
+Context-switching:
+  É o nome dado a troca de contexto, quando O
+  sistema operacional(scheluder) decide parar um
+  processo e começar a executar outro.
+  Isso geralmente acontece devido a diversos 
+  motivos, como agendamento de tarefas, prioridades
+  de processos ou eventos de entrada/saída.
+Blocking I/O:
+  Quando temos um thread que realiza uma operação demorada
+  como acessar banco de dados,ler arquivos, baixar recursos, etc
+  temos uma operação bloqueante, onde teremos que aguardar a
+  finalização dessa operação para usarmos o thread novamente.
+Asyncronous I/O:
+  Temos Operações assíncronas, onde o thread encarregado
+  de executar algo como uma conexão ao banco de dados,
+  baixar arquivos, ler arquivos, escrever arquivos, vai
+  ficar de lado enquanto executa essas tarefas, quando ele
+  finalizar será enviado um evento de término para CPU,
+  que poderá prosseguir com o seu processamento.
+Servidores FTP:
+  Um servidor FTP é usado para transferir arquivos pela
+  Internet usando o protocolo FTP. Existem duas configurações
+  principais: ativo e passivo. No FTP ativo, o servidor se
+  conecta de volta ao cliente para a transferência de dados,
+  enquanto no FTP passivo, o cliente solicita ao servidor para
+  abrir uma porta de dados para transferência. É uma maneira eficaz
+  de mover arquivos de e para servidores remotos.
+Pipe:
+  Os pipes são basicamente canais unidirecionais que permitem a
+  comunicação entre processos, permitindo que a saída de um processo
+  seja diretamente usada como entrada para outro processo.
+FIFO:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
