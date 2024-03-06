@@ -1,0 +1,195 @@
+SISTEMA OPERACIONAL
+
+Definição de Sistema Operacional (SO): 
+  O SO é um software básico necessário para que
+  dispositivos como computadores, tablets e
+  smartphones funcionem. Ele fornece uma interface 
+  amigável para os usuários, permitindo que interajam
+  com o hardware de forma mais abstrata, sem precisar
+  lidar diretamente com a complexidade dos códigos binários.
+Funções do SO:
+  O SO é uma camada de software entre o hardware
+  e os programas do usuário. Ele gerencia os
+  recursos da máquina, controla as operações do
+  computador e permite a execução de programas aplicativos.
+Classificação dos Programas: 
+  Os programas podem ser divididos em programas
+  do sistema e programas aplicativos. Os programas
+  do sistema manipulam e gerenciam as operações do
+  computador, enquanto os programas aplicativos
+  resolvem demandas específicas dos usuários, como
+  aplicativos comuns.
+Processo em Sistemas Operacionais:
+  Um programa em execução que requer recursos da máquina
+  e interage com outros processos. Os principais estados
+  de um processo são: pronto, em execução e em espera/bloqueado.
+Chamadas de Sistema:
+  Mecanismos que permitem que programas solicitem serviços
+  ao núcleo do sistema operacional.
+Shell: 
+  Interface de comunicação entre o usuário e o sistema
+  operacional, podendo ser por linha de comando (CLI) ou
+  por interface gráfica.
+Classificação dos Sistemas Operacionais: 
+  Podem ser multiusuário, permitindo acesso simultâneo
+  ao computador para vários usuários, e multitarefa, que
+  permite alternância rápida entre vários processos em execução,
+  mesmo com uma única CPU.
+Multiprogramação: 
+  Técnica em sistemas multitarefa com uma única CPU, permitindo
+  a execução intercalada de vários programas.
+Multiprocessamento: 
+  Técnica em sistemas que possuem múltiplas CPUs, permitindo
+  a execução simultânea de vários processos em diferentes CPUs.
+Máquinas de Níveis: 
+  Existem diversos níveis de abstração em um
+  computador, desde a máquina real, composta pelo
+  hardware, até a programação assembler, que lida
+  com funcionalidades específicas da máquina.
+Sistema Operacional como Camada Intermediária: 
+  O sistema operacional atua como uma camada entre
+  a programação de baixo nível e a lógica do circuito
+  integrado, fornecendo uma interface mais amigável para
+  o usuário e os aplicativos.
+Modos de Acesso ao Sistema: 
+  Os sistemas operacionais atuais adotam dois modos de
+  acesso - modo usuário, para aplicações com acesso limitado
+  a instruções não privilegiadas, e modo kernel, para acesso
+  a instruções privilegiadas.
+Inicialização do Sistema Operacional: 
+  Ao ligar o dispositivo, o sistema operacional é carregado da
+  memória secundária para a memória RAM, onde executa programas
+  enquanto o computador está ligado. O bootloader é responsável
+  por iniciar esse processo.
+Linguagem do Sistema Operacional: 
+  Os primeiros sistemas operacionais eram escritos em linguagem
+  assembly, garantindo alta performance, mas com dependência do
+  hardware. Atualmente, muitos sistemas são escritos em linguagens
+  de nível mais alto, como C e C++, para maior portabilidade.
+Arquiteturas de Sistemas Operacionais: 
+  Existem diversas arquiteturas, incluindo monolítica, micronúcleo,
+  em camadas e de máquina virtual, cada uma com suas características
+  e vantagens.
+Monolítica: 
+  Neste tipo de arquitetura, o kernel consiste em um
+  único executável que inclui todos os serviços do sistema
+  operacional, como gerenciamento de memória, sistema de
+  arquivos e drivers de dispositivos. Exemplos incluem o
+  Linux e o Windows NT (embora este último tenha componentes
+  opcionais que podem ser carregados dinamicamente).
+Em camadas (ou em estratos): 
+  Nessa arquitetura, o kernel é dividido em camadas distintas,
+  cada uma responsável por um conjunto específico de funcionalidades.
+  As camadas se comunicam entre si através de interfaces bem definidas.
+  Isso pode proporcionar maior modularidade e facilitar a manutenção do
+  sistema operacional. Exemplos incluem o sistema operacional MINIX.
+Microkernel: 
+  No caso do microkernel, apenas funcionalidades essenciais, como
+  gerenciamento de memória e comunicação entre processos, são implementadas
+  no núcleo. Outros serviços, como sistema de arquivos e drivers de dispositivos,
+  são executados como processos do usuário, fora do kernel. Essa abordagem visa
+  a minimizar a quantidade de código no kernel, tornando-o mais confiável e
+  flexível. Exemplos incluem o sistema operacional QNX e o Hurd (um kernel
+  experimental para o sistema operacional GNU).
+Máquina Virtual: 
+  Essa arquitetura permite a execução de várias máquinas virtuais independentes
+  em uma máquina real, cada uma com seu próprio sistema operacional, emulando
+  o hardware para permitir a execução de aplicativos de diferentes plataformas.
+Acesso Concorrente:
+  O acesso concorrente ocorre quando vários processos
+  solicitam recursos da CPU simultaneamente. Isso pode
+  levar a problemas, como interferência entre processos
+  e conflitos de acesso aos dados. O sistema operacional
+  desempenha um papel crucial em garantir que esses problemas
+  sejam evitados.
+Classificação dos Processos
+  Os processos podem ser classificados como
+  CPU-bound, que demandam principalmente o uso da CPU,
+  e I/O-bound, que dependem mais dos dispositivos de entrada
+  e saída. Entender essas classificações é essencial para o
+  escalonamento eficiente dos processos.
+O Papel do Escalonador
+  O escalonador é responsável por implementar a política de
+  escalonamento, que visa manter o processador ocupado,
+  equilibrar o uso da CPU entre os processos, maximizar o
+  desempenho e garantir tempos de resposta aceitáveis para
+  os usuários.
+Políticas de Escalonamento
+  Existem duas principais categorias de políticas de escalonamento:
+  preemptivas e não preemptivas. As políticas preemptivas permitem que
+  o sistema interrompa um processo em execução para atender a um processo
+  mais prioritário, enquanto as não preemptivas não permitem essa interrupção.
+TIPOS DE ESCALONAMENTO:
+  Escalonamento Circular (Round Robin): Mantendo a Ordem de Chegada
+    O escalonamento circular, também conhecido como Round Robin, é um método que garante
+    que os processos sejam executados na ordem em que chegaram. No entanto, há uma diferença
+    fundamental: cada processo tem uma fatia de tempo definida para sua execução. Quando um
+    processo atinge o final de sua fatia de tempo, ele é interrompido e colocado no final da
+    fila de pronto, dando lugar ao próximo processo. Isso garante que nenhum processo monopolize
+    a CPU por muito tempo e ajuda a manter uma distribuição justa do tempo de CPU entre os processos.
+  Escalonamento por Prioridades: Atendendo às Necessidades Críticas
+    No escalonamento por prioridades, cada processo é atribuído a uma fila com base em sua importância,
+    tipo de processamento ou área de memória acessada. Processos com prioridades mais altas são
+    selecionados para execução primeiro, garantindo que as tarefas mais críticas sejam atendidas
+    prontamente. Se houver processos com a mesma prioridade, o escalonamento segue o critério
+    FIFO (First In, First Out), dando preferência aos que chegaram primeiro. Quando um processo de
+    prioridade mais alta entra na fila de pronto, ele pode interromper o processo em execução, levando
+    à preempção por prioridade.
+  Escalonamento por Múltiplas Filas: Flexibilidade na Gestão de Recursos
+    O escalonamento por múltiplas filas permite que diferentes categorias de processos sejam gerenciadas
+    separadamente, de acordo com suas características e requisitos específicos. Cada fila pode ter seu
+    próprio mecanismo de escalonamento, permitindo a coexistência de vários métodos de escalonamento dentro
+    do mesmo sistema operacional. Isso oferece flexibilidade para otimizar o desempenho e atender às
+    demandas variadas dos diferentes tipos de processos, desde tarefas de alto desempenho até processos de
+    baixa prioridade.
+MEMÓRIA:
+  Memória principal refere-se à memória RAM, onde os programas são carregados em tempo de execução.
+  Memória secundária, como o disco rígido (HD) ou SSD, armazena dados de forma permanente quando não estão em uso.
+  A memória RAM é volátil, enquanto a memória secundária é não volátil.
+  Um programa deve ser carregado da memória secundária para a memória principal para ser executado.
+  O gerenciador de memória (GM) monitora o uso da memória principal, aloca e libera espaço conforme necessário.
+  A multiprogramação permite que vários programas sejam executados simultaneamente na memória principal.
+  A hierarquia de memória combina memórias voláteis e não voláteis para otimizar o armazenamento e o acesso aos dados.
+  A unidade de gerenciamento de memória (MMU) converte endereços lógicos em endereços físicos na memória RAM.
+  A alocação de memória pode ser estática (partições fixas) ou dinâmica (tamanhos variáveis conforme a necessidade).
+  Na alocação dinâmica, as lacunas na memória física são mantidas em uma lista para alocação de processos.
+  Existem quatro tipos de algoritmos para alocação de memória dinâmica: Best Fit, Worst Fit, First Fit e Circular Fit,
+  cada um com diferentes estratégias de busca e alocação de espaço na memória.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
